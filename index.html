@@ -13,16 +13,21 @@
 </head>
 <body>
     <div id="root"></div>
+    <div id="modal"></div>
 
     <!-- jsx react code -->
      <script type="text/babel">
+        const msg = "Hello modal!"
+
         const App = () => {
             return (
                 <h1>Hello world! </h1>
             )
         }
-
-        ReactDOM.render(<App />, document.getElementById('root'))
+        document.getElementById('modal').innerText = msg
+        const domNode = document.getElementById('root');
+        const root = ReactDOM.createRoot(domNode);
+        root.render(<App />)
      </script>
     
 </body>
