@@ -1,59 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React with CDN</title>
-    <!-- Link to React and React DOM CDN -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
 
-    <!-- Link to Babel CDN -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="root"></div>
-    <!-- jsx react code -->
-     <script type="text/babel">
-        const msg = "Hello modal!"
+    <script type="text/babel">
+      const msg = "Hello modal!";
 
-        class Header extends React.Component {
-            constructor (props) {
-                super(props);
-                this.state = {favouriteColor: 'turquoise'}
+      class Header extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { favouriteColor: "turquoise" };
 
-                // bind method to this
-                this.changeFavColor = this.changeFavColor.bind(this);
-            }
-            shouldComponentUpdate() {
-                return true;
-            }
-
-            changeFavColor () {
-                this.setState({favouriteColor: 'black'});
-            }
-
-            render () {
-                return (
-                    <div>
-                        My favourite color is {this.state.favouriteColor}
-                        <button onClick={this.changeFavColor} > Change color</button>
-                    </div>
-                    
-                )
-            }
+          this.changeFavColor = this.changeFavColor.bind(this);
+        }
+        shouldComponentUpdate() {
+          return true;
         }
 
-
-        const App = () => {
-            return (
-                <h1>Hello world! </h1>
-            )
+        changeFavColor() {
+          this.setState({ favouriteColor: "black" });
         }
-        const domNode = document.getElementById('root');
-        const root = ReactDOM.createRoot(domNode);
-        root.render(<Header />)
-     </script>
-    
-</body>
+
+        render() {
+          return (
+            <div>
+              My favourite color is {this.state.favouriteColor}
+              <button onClick={this.changeFavColor}> Change color</button>
+            </div>
+          );
+        }
+      }
+
+      const App = () => {
+        return <h1>Hello world! </h1>;
+      };
+      const domNode = document.getElementById("root");
+      const root = ReactDOM.createRoot(domNode);
+      root.render(<Header />);
+    </script>
+  </body>
 </html>
