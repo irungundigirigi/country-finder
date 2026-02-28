@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React Functional component</title>
-    <script
-      src="https://unpkg.com/react@18/umd/react.development.js"
-      onload="console.log('React Loaded')"
-    ></script>
+    <title>ReactCDN Functional App</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
@@ -15,25 +12,16 @@
     <div id="root"></div>
     <script type="text/babel">
       function Profile() {
-        React.useEffect(() => {
-          setLoading(false);
-        }, []);
-
         const [number, setNumber] = React.useState(3);
-        const [loading, setLoading] = React.useState(true);
 
         function increment() {
           setNumber((prevCount) => prevCount + 1);
-        }
-        function hideLoader() {
-          setLoading(false);
         }
 
         return (
           <>
             <h1>Hello number {number} world! </h1>
             <button onClick={increment}>Click me</button>
-            {loading && <h1> React Loading </h1>}
           </>
         );
       }
