@@ -56,7 +56,7 @@
             </form>
             {country?.map((c) => (
               <div key={c.cca2}>
-                <h4>
+                <h4 title={c.flags.alt}>
                   {c.flag} {c.altSpellings.join(" / ")}
                 </h4>
                 <img
