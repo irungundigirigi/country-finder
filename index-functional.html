@@ -32,9 +32,9 @@
           fetchData();
         }, []);
 
-        function increment() {
+        const increment = React.useCallback(() => {
           setNumber((prevCount) => prevCount + 1);
-        }
+        }, []);
 
         async function fetchData() {
           const data = await fetch(
@@ -48,8 +48,8 @@
 
         return (
           <>
-            <h1>Hello number {number} world! </h1>
-            <button onClick={increment}>Click me</button>
+            <h1>Counter: {number} </h1>
+            <button onClick={increment}>Increment</button>
             <ul style={{ listStyleType: "none" }}>
               {tasks.map((task) => (
                 <li key={task.name.common}>
