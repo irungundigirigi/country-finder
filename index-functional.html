@@ -59,7 +59,11 @@
                 <h4>
                   {c.flag} {c.altSpellings.join(" / ")}
                 </h4>
-                <span>Capital city: {c.capital.join(" / ")}</span>
+                <img
+                  src={c.coatOfArms.png}
+                  style={{ height: "50px", width: "50px", marginLeft: "10px" }}
+                />
+                <span>Capital city: {c.capital?.join(" / ")}</span>
                 <br />
                 <span>Region: {c.region}</span>
                 <br />
@@ -84,7 +88,7 @@
     </script>
     <script>
       $("#togglecolor").click(() => {
-        $(".body").css("background-color", "teal");
+        $(".body").css("background-color", "#");
       });
     </script>
   </body>
