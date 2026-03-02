@@ -17,7 +17,7 @@
   <body class="body" style="background-color: wheat">
     <button id="togglecolor">Change color</button>
     <div>
-      <h4>Search information about a country.</h4>
+      <h3>Search information about a country.</h3>
     </div>
     <div id="root"></div>
     <script type="text/babel">
@@ -42,8 +42,6 @@
           }
         }
 
-        console.log(country);
-
         return (
           <>
             <form>
@@ -52,7 +50,7 @@
               <button disable={loading.toString()} onClick={fetchData}>
                 Search
               </button>
-              {loading && <h4>Loading country</h4>}
+              {loading ? <h4>Loading country</h4> : ""}
             </form>
             {country?.map((c) => (
               <div key={c.cca2}>
