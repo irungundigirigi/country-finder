@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ReactCDN Functional App</title>
+    <title>Country search</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -15,57 +15,36 @@
     ></script>
   </head>
   <body class="body" style="background-color: wheat">
+    <button id="togglecolor">Change color</button>
     <div>
-      <h4>
-        This is a React CDN application. React, ReactDOM and babel are sourced
-        from unpkg. The app implements a counter by React useState hook.
-      </h4>
+      <h4>Search information about a country.</h4>
     </div>
     <div id="root"></div>
-    <button id="togglecolor">Change color</button>
     <script type="text/babel">
       function Profile() {
-        const [tasks, setTasks] = React.useState([]);
-        const [number, setNumber] = React.useState(0);
+        const [country, setCountry] = React.useState([]);
+        const countryRef = React.useRef("");
 
-        React.useEffect(() => {
-          fetchData();
-        }, []);
-
-        const increment = React.useCallback(() => {
-          setNumber((prevCount) => prevCount + 1);
-        }, []);
-
-        async function fetchData() {
+        async function fetchData(e) {
+          e.preventDefault();
           const data = await fetch(
-            "https://restcountries.com/v3.1/all?fields=name,capital,currencies"
+            `https://restcountries.com/v3.1/name/${countryRef.current.value}`
           )
             .then((data) => data.json())
-            .then((data) => setTasks(data));
+            .then((data) => console.log(data))
+            .then((data) => setCountry(data));
         }
-
-        console.log(tasks);
-
         return (
           <>
-            <h1>Counter: {number} </h1>
-            <button onClick={increment}>Increment</button>
-            <ul style={{ listStyleType: "none" }}>
-              {tasks.map((task) => (
-                <li key={task.name.common}>
-                  <p>
-                    {" "}
-                    {task.name.common}
-                    {task.name.official}{" "}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <form>
+              <label for="country"> Country Name </label>
+              <input ref={countryRef} type="text" name="country"></input>
+              <button onClick={fetchData}>Search</button>
+            </form>
           </>
         );
       }
       const root = ReactDOM.createRoot(document.getElementById("root"));
-      const element = <h1>Profile</h1>;
       root.render(<Profile />);
     </script>
     <script>
