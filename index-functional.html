@@ -37,7 +37,9 @@
         }
 
         async function fetchData() {
-          const data = await fetch("https://jsonplaceholder.typicode.com/todos")
+          const data = await fetch(
+            "https://restcountries.com/v3.1/all?fields=name,capital,currencies"
+          )
             .then((data) => data.json())
             .then((data) => setTasks(data));
         }
@@ -48,11 +50,14 @@
           <>
             <h1>Hello number {number} world! </h1>
             <button onClick={increment}>Click me</button>
-            <ul>
+            <ul style={{ listStyleType: "none" }}>
               {tasks.map((task) => (
-                <li key={task.id}>
-                  {task.title}
-                  {task.completed}
+                <li key={task.name.common}>
+                  <p>
+                    {" "}
+                    {task.name.common}
+                    {task.name.official}{" "}
+                  </p>
                 </li>
               ))}
             </ul>
