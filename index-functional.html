@@ -22,25 +22,60 @@
     <div id="root"></div>
     <script type="text/babel">
       function Profile() {
-        const [country, setCountry] = React.useState([]);
+        const [country, setCountry] = React.useState(null);
+        const [loading, setLoading] = React.useState(false);
         const countryRef = React.useRef("");
 
         async function fetchData(e) {
           e.preventDefault();
-          const data = await fetch(
-            `https://restcountries.com/v3.1/name/${countryRef.current.value}`
-          )
-            .then((data) => data.json())
-            .then((data) => console.log(data))
-            .then((data) => setCountry(data));
+          setLoading(true);
+          try {
+            const data = await fetch(
+              `https://restcountries.com/v3.1/name/${countryRef.current.value}`
+            )
+              .then((data) => data.json())
+              .then((data) => setCountry(data), setLoading(false));
+          } catch (error) {
+            console.log(error);
+          } finally {
+            setLoading(false);
+          }
         }
+
+        console.log(country);
+
         return (
           <>
             <form>
-              <label for="country"> Country Name </label>
+              <label htmlFor="country"> Country Name </label>
               <input ref={countryRef} type="text" name="country"></input>
-              <button onClick={fetchData}>Search</button>
+              <button disable={loading.toString()} onClick={fetchData}>
+                Search
+              </button>
+              {loading && <h4>Loading country</h4>}
             </form>
+            {country?.map((c) => (
+              <div key={c.cca2}>
+                <h4>
+                  {c.flag} {c.altSpellings.join(" / ")}
+                </h4>
+                <span>Capital city: {c.capital.join(" / ")}</span>
+                <br />
+                <span>Region: {c.region}</span>
+                <br />
+                <span>Population: {c.population.toLocaleString()}</span>
+                <br />
+                <span>
+                  Currency:{" "}
+                  {Object.values(c.currencies)
+                    .map((cur) => `${cur.name} (${cur.symbol})`)
+                    .join(", ")}
+                </span>
+                <br />
+                <span>Languages: {Object.values(c.languages).join(", ")}</span>
+                <br />
+              </div>
+            ))}
           </>
         );
       }
