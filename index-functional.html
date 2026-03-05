@@ -50,7 +50,7 @@
               <button disable={loading.toString()} onClick={fetchData}>
                 Search
               </button>
-              {loading ? <h4>Loading country</h4> : ""}
+              {loading ? <p>Loading country</p> : ""}
             </form>
             {country?.map((c) => (
               <div key={c.cca2}>
