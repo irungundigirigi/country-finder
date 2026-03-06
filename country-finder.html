@@ -24,19 +24,24 @@
       function Profile() {
         const [country, setCountry] = React.useState(null);
         const [loading, setLoading] = React.useState(false);
+        const [error, setError] = React.useState(null);
         const countryRef = React.useRef("");
 
         async function fetchData(e) {
           e.preventDefault();
           setLoading(true);
+          setError(null);
           try {
             const data = await fetch(
               `https://restcountries.com/v3.1/name/${countryRef.current.value}`
             )
               .then((data) => data.json())
-              .then((data) => setCountry(data), setLoading(false));
+              .then((data) => {
+                setCountry(data);
+                setLoading(false);
+              });
           } catch (error) {
-            console.log(error);
+            setError(error);
           } finally {
             setLoading(false);
           }
@@ -52,6 +57,7 @@
               </button>
               {loading ? <p>Loading country</p> : ""}
             </form>
+            {error && <div>{error}</div>}
             {country?.map((c) => (
               <div key={c.cca2}>
                 <h4 title={c.flags.alt}>
