@@ -25,6 +25,7 @@
         const [country, setCountry] = React.useState(null);
         const [loading, setLoading] = React.useState(false);
         const [error, setError] = React.useState(null);
+
         const countryRef = React.useRef("");
 
         async function fetchData(e) {
@@ -91,8 +92,11 @@
       root.render(<Profile />);
     </script>
     <script>
+      const colors = ["#ff5733", "#33ff57", "#3357ff", "#f1c40f", "#9b59b6"];
+
       $("#togglecolor").click(() => {
-        $(".body").css("background-color", "#");
+        const randomcolor = colors[Math.floor(Math.random() * colors.length)];
+        $(".body").css("background-color", randomcolor);
       });
     </script>
   </body>
