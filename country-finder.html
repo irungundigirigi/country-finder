@@ -49,6 +49,7 @@
               .then((data) => {
                 setCountry(data);
                 setLoading(false);
+                console.log(data);
               });
           } catch (error) {
             setError(error);
@@ -80,6 +81,22 @@
                 <span>Capital city: {c.capital?.join(" / ")}</span>
                 <br />
                 <span>Region: {c.region}</span>
+                <br />
+                <span>
+                  {" "}
+                  <button
+                    onClick={() =>
+                      window.open(
+                        c.maps.googleMaps,
+                        c.altSpellings[0],
+                        "width=1000,height=500,resizable=yes,scrollbars=yes"
+                      )
+                    }
+                  >
+                    View Map
+                  </button>
+                </span>
+
                 <br />
                 <span>Population: {c.population.toLocaleString()}</span>
                 <br />
