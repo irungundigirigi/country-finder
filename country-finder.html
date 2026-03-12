@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Country search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -14,7 +20,10 @@
       referrerpolicy="no-referrer"
     ></script>
   </head>
-  <body class="body" style="background-color: wheat">
+  <body
+    class="body"
+    style="background-color: wheat; font-family: 'Google Sans', sans-serif"
+  >
     <button id="togglecolor">Change color</button>
     <div>
       <h3>Search information about a country.</h3>
@@ -56,7 +65,7 @@
               <button disable={loading.toString()} onClick={fetchData}>
                 Search
               </button>
-              {loading ? <p>Loading country</p> : ""}
+              {loading ? <p>Searching...</p> : ""}
             </form>
             {error && <div>{error}</div>}
             {country?.map((c) => (
